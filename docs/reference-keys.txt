@@ -1,0 +1,4 @@
+ecdi-variables
+raw-configuration
+number-of-individuals-with-exploitable-information
+desciption-of-ecdi-in-each-region
