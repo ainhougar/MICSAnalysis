@@ -49,6 +49,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -139,12 +140,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overall Comments</a></li>
 <li class="chapter" data-level="1" data-path="ecdi-variables.html"><a href="ecdi-variables.html"><i class="fa fa-check"></i><b>1</b> ECDI variables</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="ecdi-variables.html"><a href="ecdi-variables.html#raw-configuration"><i class="fa fa-check"></i><b>1.1</b> Raw configuration</a></li>
+<li class="chapter" data-level="1.1" data-path="ecdi-variables.html"><a href="ecdi-variables.html#a-raw-configuration"><i class="fa fa-check"></i><b>1.1</b> A) Raw configuration</a></li>
 <li class="chapter" data-level="" data-path="ecdi-variables.html"><a href="ecdi-variables.html#output"><i class="fa fa-check"></i>Output</a></li>
-<li class="chapter" data-level="1.2" data-path="ecdi-variables.html"><a href="ecdi-variables.html#number-of-individuals-with-exploitable-information"><i class="fa fa-check"></i><b>1.2</b> Number of individuals with exploitable information</a></li>
+<li class="chapter" data-level="" data-path="ecdi-variables.html"><a href="ecdi-variables.html#observations"><i class="fa fa-check"></i>Observations</a></li>
+<li class="chapter" data-level="1.2" data-path="ecdi-variables.html"><a href="ecdi-variables.html#b-number-of-individuals-with-exploitable-information"><i class="fa fa-check"></i><b>1.2</b> B) Number of individuals with exploitable information</a></li>
 <li class="chapter" data-level="" data-path="ecdi-variables.html"><a href="ecdi-variables.html#output-1"><i class="fa fa-check"></i>Output</a></li>
-<li class="chapter" data-level="1.3" data-path="ecdi-variables.html"><a href="ecdi-variables.html#desciption-of-ecdi-in-each-region"><i class="fa fa-check"></i><b>1.3</b> Desciption of ECDI in each region</a></li>
+<li class="chapter" data-level="" data-path="ecdi-variables.html"><a href="ecdi-variables.html#observations-1"><i class="fa fa-check"></i>Observations</a></li>
+<li class="chapter" data-level="1.3" data-path="ecdi-variables.html"><a href="ecdi-variables.html#c-desciption-of-ecdi-in-each-region"><i class="fa fa-check"></i><b>1.3</b> C) Desciption of ECDI in each region</a></li>
 <li class="chapter" data-level="" data-path="ecdi-variables.html"><a href="ecdi-variables.html#output-2"><i class="fa fa-check"></i>Output</a></li>
+<li class="chapter" data-level="" data-path="ecdi-variables.html"><a href="ecdi-variables.html#observations-2"><i class="fa fa-check"></i>Observations</a></li>
 </ul></li>
 </ul>
 
@@ -173,22 +177,27 @@ The ECDI is a binary variable: (a)Being developmentally on track VS (b)Not being
 <p>ECDI items are coded such that answers to questions are 1: YES &amp; 2: NO. Extra codes are for Don’t Know (8) &amp; No response(9).<br />
 Below I describe the variables associated to each ECDI dimension and the scores (answers) contributing to being<br />
 developmentally on-track:</p>
-<p><strong>(1)Literacy-numeracy</strong>:
-Vars: EC6, EC7, EC8
+<p><strong>(1)Literacy-numeracy</strong>:</p>
+<p>Vars: EC6, EC7, EC8
 Developmentally on track: Having a score of 1 in at least 2 out of the 3 items.</p>
-<p><strong>(2)Physical</strong>
+<p><strong>(2)Physical</strong><br />
 EC9=1 OR EC10=2</p>
 <p><strong>(3)Approaches to learning:</strong><br />
 EC9=1 OR EC10=1</p>
-<p><strong>(4)Social-emotional:</strong>
+<p><strong>(4)Social-emotional:</strong><br />
 At least 2 out of the 3 items received these scores: EC13=1 , EC14=2 , EC15=2</p>
+<p><br/></p>
 <p>In this table we describe, in text format, the answers contributing to being developmentally on track.</p>
-<p>![Table: ECDI, Answers Contributing To Being Developmentally On Track]/ImageECDIDevelopmentallyOnTrackScores.png)</p>
+<div class="float">
+<img src="/Images/ECDIDevelopmentallyOnTrackScores.png" alt="Figure: ECDI: Answers Contributing to Being Developmentally On Track" />
+<div class="figcaption"><strong>Figure:</strong> ECDI: Answers Contributing to Being Developmentally On Track</div>
+</div>
 <p><br/>
 <br/></p>
 <p>My data consists of datasets of the 4 regions in Pakistan: Balochistan, Pahktukistan, Punjab, Sindh.<br />
 All household member data was merged in these datasets. I use UF17 var(completion of children under 5 questionnaire)<br />
 to select only data relating to children under 5 y.o.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="ecdi-variables.html#cb1-1" tabindex="-1"></a><span class="co">#Set wd</span></span>
 <span id="cb1-2"><a href="ecdi-variables.html#cb1-2" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
 <span id="cb1-3"><a href="ecdi-variables.html#cb1-3" tabindex="-1"></a></span>
@@ -204,6 +213,8 @@ to select only data relating to children under 5 y.o.</p>
 <span id="cb1-13"><a href="ecdi-variables.html#cb1-13" tabindex="-1"></a>Pahktu<span class="ot">&lt;-</span><span class="fu">readRDS</span>(<span class="st">&quot;DATA/Created_Datasets/mPahktu.rds&quot;</span>)</span>
 <span id="cb1-14"><a href="ecdi-variables.html#cb1-14" tabindex="-1"></a>Punjab<span class="ot">&lt;-</span><span class="fu">readRDS</span>(<span class="st">&quot;DATA/Created_Datasets/mPunjab.rds&quot;</span>)</span>
 <span id="cb1-15"><a href="ecdi-variables.html#cb1-15" tabindex="-1"></a>Sindh<span class="ot">&lt;-</span><span class="fu">readRDS</span>(<span class="st">&quot;DATA/Created_Datasets/mSindh.rds&quot;</span>)</span></code></pre></div>
+</details>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="ecdi-variables.html#cb2-1" tabindex="-1"></a><span class="co">#Create filtered datasets</span></span>
 <span id="cb2-2"><a href="ecdi-variables.html#cb2-2" tabindex="-1"></a>Balo_f<span class="ot">&lt;-</span>Balo<span class="sc">%&gt;%</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(UF17))</span>
 <span id="cb2-3"><a href="ecdi-variables.html#cb2-3" tabindex="-1"></a>Pahktu_f<span class="ot">&lt;-</span>Pahktu<span class="sc">%&gt;%</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(UF17))</span>
@@ -222,15 +233,19 @@ to select only data relating to children under 5 y.o.</p>
 <span id="cb2-16"><a href="ecdi-variables.html#cb2-16" tabindex="-1"></a>            </span>
 <span id="cb2-17"><a href="ecdi-variables.html#cb2-17" tabindex="-1"></a>            <span class="co">#Socio-emotional</span></span>
 <span id="cb2-18"><a href="ecdi-variables.html#cb2-18" tabindex="-1"></a>             <span class="st">&quot;EC13&quot;</span>,<span class="st">&quot;EC14&quot;</span>, <span class="st">&quot;EC15&quot;</span>) </span></code></pre></div>
-<div id="raw-configuration" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Raw configuration<a href="ecdi-variables.html#raw-configuration" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</details>
+<div id="a-raw-configuration" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> A) Raw configuration<a href="ecdi-variables.html#a-raw-configuration" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 </div>
 <div id="output" class="section level2 unnumbered hasAnchor">
 <h2>Output<a href="ecdi-variables.html#output" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>To describe all ECDI items I use a the tbl_summary function from the gtsummary package. In the table, we note:
-* Sample sizes in each region
-* Complete data per item
-* Number of missing per item</p>
+<p>To describe all ECDI items I use a the <em>tbl_summary</em> function from the <em>gtsummary</em> package. In the table, we note:</p>
+<ul>
+<li>Sample sizes in each region</li>
+<li>Complete data per item</li>
+<li>Number of missing per item</li>
+</ul>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="ecdi-variables.html#cb3-1" tabindex="-1"></a><span class="co">#Description table function:::::::::::::::::</span></span>
 <span id="cb3-2"><a href="ecdi-variables.html#cb3-2" tabindex="-1"></a>desc_table<span class="ot">&lt;-</span><span class="cf">function</span>(data_f){ </span>
 <span id="cb3-3"><a href="ecdi-variables.html#cb3-3" tabindex="-1"></a>      data_sum<span class="ot">&lt;-</span>data_f<span class="sc">%&gt;%</span></span>
@@ -247,23 +262,24 @@ to select only data relating to children under 5 y.o.</p>
 <span id="cb3-14"><a href="ecdi-variables.html#cb3-14" tabindex="-1"></a>          <span class="at">footnote =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb3-15"><a href="ecdi-variables.html#cb3-15" tabindex="-1"></a>      <span class="fu">return</span>(data_sum)</span>
 <span id="cb3-16"><a href="ecdi-variables.html#cb3-16" tabindex="-1"></a>}</span></code></pre></div>
-<div id="mkpooprzjo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#mkpooprzjo table {
+</details>
+<div id="mzzxgknqkd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mzzxgknqkd table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mkpooprzjo thead, #mkpooprzjo tbody, #mkpooprzjo tfoot, #mkpooprzjo tr, #mkpooprzjo td, #mkpooprzjo th {
+#mzzxgknqkd thead, #mzzxgknqkd tbody, #mzzxgknqkd tfoot, #mzzxgknqkd tr, #mzzxgknqkd td, #mzzxgknqkd th {
   border-style: none;
 }
 
-#mkpooprzjo p {
+#mzzxgknqkd p {
   margin: 0;
   padding: 0;
 }
 
-#mkpooprzjo .gt_table {
+#mzzxgknqkd .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -289,12 +305,12 @@ to select only data relating to children under 5 y.o.</p>
   border-left-color: #D3D3D3;
 }
 
-#mkpooprzjo .gt_caption {
+#mzzxgknqkd .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mkpooprzjo .gt_title {
+#mzzxgknqkd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -306,7 +322,7 @@ to select only data relating to children under 5 y.o.</p>
   border-bottom-width: 0;
 }
 
-#mkpooprzjo .gt_subtitle {
+#mzzxgknqkd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -318,7 +334,7 @@ to select only data relating to children under 5 y.o.</p>
   border-top-width: 0;
 }
 
-#mkpooprzjo .gt_heading {
+#mzzxgknqkd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -330,13 +346,13 @@ to select only data relating to children under 5 y.o.</p>
   border-right-color: #D3D3D3;
 }
 
-#mkpooprzjo .gt_bottom_border {
+#mzzxgknqkd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mkpooprzjo .gt_col_headings {
+#mzzxgknqkd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -351,7 +367,7 @@ to select only data relating to children under 5 y.o.</p>
   border-right-color: #D3D3D3;
 }
 
-#mkpooprzjo .gt_col_heading {
+#mzzxgknqkd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -371,7 +387,7 @@ to select only data relating to children under 5 y.o.</p>
   overflow-x: hidden;
 }
 
-#mkpooprzjo .gt_column_spanner_outer {
+#mzzxgknqkd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -383,15 +399,15 @@ to select only data relating to children under 5 y.o.</p>
   padding-right: 4px;
 }
 
-#mkpooprzjo .gt_column_spanner_outer:first-child {
+#mzzxgknqkd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mkpooprzjo .gt_column_spanner_outer:last-child {
+#mzzxgknqkd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mkpooprzjo .gt_column_spanner {
+#mzzxgknqkd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -403,11 +419,11 @@ to select only data relating to children under 5 y.o.</p>
   width: 100%;
 }
 
-#mkpooprzjo .gt_spanner_row {
+#mzzxgknqkd .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mkpooprzjo .gt_group_heading {
+#mzzxgknqkd .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -433,7 +449,7 @@ to select only data relating to children under 5 y.o.</p>
   text-align: left;
 }
 
-#mkpooprzjo .gt_empty_group_heading {
+#mzzxgknqkd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -448,15 +464,15 @@ to select only data relating to children under 5 y.o.</p>
   vertical-align: middle;
 }
 
-#mkpooprzjo .gt_from_md > :first-child {
+#mzzxgknqkd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mkpooprzjo .gt_from_md > :last-child {
+#mzzxgknqkd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mkpooprzjo .gt_row {
+#mzzxgknqkd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -475,7 +491,7 @@ to select only data relating to children under 5 y.o.</p>
   overflow-x: hidden;
 }
 
-#mkpooprzjo .gt_stub {
+#mzzxgknqkd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -488,7 +504,7 @@ to select only data relating to children under 5 y.o.</p>
   padding-right: 5px;
 }
 
-#mkpooprzjo .gt_stub_row_group {
+#mzzxgknqkd .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -502,15 +518,15 @@ to select only data relating to children under 5 y.o.</p>
   vertical-align: top;
 }
 
-#mkpooprzjo .gt_row_group_first td {
+#mzzxgknqkd .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mkpooprzjo .gt_row_group_first th {
+#mzzxgknqkd .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mkpooprzjo .gt_summary_row {
+#mzzxgknqkd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -520,16 +536,16 @@ to select only data relating to children under 5 y.o.</p>
   padding-right: 5px;
 }
 
-#mkpooprzjo .gt_first_summary_row {
+#mzzxgknqkd .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mkpooprzjo .gt_first_summary_row.thick {
+#mzzxgknqkd .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mkpooprzjo .gt_last_summary_row {
+#mzzxgknqkd .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -539,7 +555,7 @@ to select only data relating to children under 5 y.o.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#mkpooprzjo .gt_grand_summary_row {
+#mzzxgknqkd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -549,7 +565,7 @@ to select only data relating to children under 5 y.o.</p>
   padding-right: 5px;
 }
 
-#mkpooprzjo .gt_first_grand_summary_row {
+#mzzxgknqkd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -559,7 +575,7 @@ to select only data relating to children under 5 y.o.</p>
   border-top-color: #D3D3D3;
 }
 
-#mkpooprzjo .gt_last_grand_summary_row_top {
+#mzzxgknqkd .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -569,11 +585,11 @@ to select only data relating to children under 5 y.o.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#mkpooprzjo .gt_striped {
+#mzzxgknqkd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mkpooprzjo .gt_table_body {
+#mzzxgknqkd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -582,7 +598,7 @@ to select only data relating to children under 5 y.o.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#mkpooprzjo .gt_footnotes {
+#mzzxgknqkd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -596,7 +612,7 @@ to select only data relating to children under 5 y.o.</p>
   border-right-color: #D3D3D3;
 }
 
-#mkpooprzjo .gt_footnote {
+#mzzxgknqkd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -605,7 +621,7 @@ to select only data relating to children under 5 y.o.</p>
   padding-right: 5px;
 }
 
-#mkpooprzjo .gt_sourcenotes {
+#mzzxgknqkd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -619,7 +635,7 @@ to select only data relating to children under 5 y.o.</p>
   border-right-color: #D3D3D3;
 }
 
-#mkpooprzjo .gt_sourcenote {
+#mzzxgknqkd .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -627,72 +643,72 @@ to select only data relating to children under 5 y.o.</p>
   padding-right: 5px;
 }
 
-#mkpooprzjo .gt_left {
+#mzzxgknqkd .gt_left {
   text-align: left;
 }
 
-#mkpooprzjo .gt_center {
+#mzzxgknqkd .gt_center {
   text-align: center;
 }
 
-#mkpooprzjo .gt_right {
+#mzzxgknqkd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mkpooprzjo .gt_font_normal {
+#mzzxgknqkd .gt_font_normal {
   font-weight: normal;
 }
 
-#mkpooprzjo .gt_font_bold {
+#mzzxgknqkd .gt_font_bold {
   font-weight: bold;
 }
 
-#mkpooprzjo .gt_font_italic {
+#mzzxgknqkd .gt_font_italic {
   font-style: italic;
 }
 
-#mkpooprzjo .gt_super {
+#mzzxgknqkd .gt_super {
   font-size: 65%;
 }
 
-#mkpooprzjo .gt_footnote_marks {
+#mzzxgknqkd .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mkpooprzjo .gt_asterisk {
+#mzzxgknqkd .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mkpooprzjo .gt_indent_1 {
+#mzzxgknqkd .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mkpooprzjo .gt_indent_2 {
+#mzzxgknqkd .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mkpooprzjo .gt_indent_3 {
+#mzzxgknqkd .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mkpooprzjo .gt_indent_4 {
+#mzzxgknqkd .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mkpooprzjo .gt_indent_5 {
+#mzzxgknqkd .gt_indent_5 {
   text-indent: 25px;
 }
 
-#mkpooprzjo .katex-display {
+#mzzxgknqkd .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#mkpooprzjo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#mzzxgknqkd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1274,62 +1290,70 @@ to select only data relating to children under 5 y.o.</p>
   </tfoot>
 </table>
 </div>
-<p><strong>Summary of observations</strong>
-Balochistan is the region where there is the larger number of “Don’t Know” responses.</p>
 </div>
-<div id="number-of-individuals-with-exploitable-information" class="section level2 hasAnchor" number="1.2">
-<h2><span class="header-section-number">1.2</span> Number of individuals with exploitable information<a href="ecdi-variables.html#number-of-individuals-with-exploitable-information" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In this section we are interested in describing the people who have YES or NO information on ECDI items.</p>
-<p>The function used for this table needs to indicate the type for categorical variables as “categorical” so that both<br />
-levels of the binary items are described.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="ecdi-variables.html#cb4-1" tabindex="-1"></a><span class="co">#Description table function:::::::::::::::::</span></span>
-<span id="cb4-2"><a href="ecdi-variables.html#cb4-2" tabindex="-1"></a>desc_table<span class="ot">&lt;-</span><span class="cf">function</span>(data_f){ </span>
-<span id="cb4-3"><a href="ecdi-variables.html#cb4-3" tabindex="-1"></a>  data_sum<span class="ot">&lt;-</span>data_f<span class="sc">%&gt;%</span></span>
-<span id="cb4-4"><a href="ecdi-variables.html#cb4-4" tabindex="-1"></a>    <span class="fu">tbl_summary</span>(</span>
-<span id="cb4-5"><a href="ecdi-variables.html#cb4-5" tabindex="-1"></a>      <span class="at">include =</span>   <span class="fu">all_of</span>(ECDIvars), </span>
-<span id="cb4-6"><a href="ecdi-variables.html#cb4-6" tabindex="-1"></a>      <span class="at">label=</span> list_labels,</span>
-<span id="cb4-7"><a href="ecdi-variables.html#cb4-7" tabindex="-1"></a>      <span class="at">type =</span> <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;categorical&quot;</span>,   <span class="co"># Show all levels for binary variables </span></span>
-<span id="cb4-8"><a href="ecdi-variables.html#cb4-8" tabindex="-1"></a>      <span class="at">statistic =</span> <span class="fu">list</span>(<span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="st">&quot;{mean} ({sd})&quot;</span>, </span>
-<span id="cb4-9"><a href="ecdi-variables.html#cb4-9" tabindex="-1"></a>                       <span class="fu">all_categorical</span>()<span class="sc">~</span> <span class="st">&quot;{n} ({p}%)&quot;</span>) ,</span>
-<span id="cb4-10"><a href="ecdi-variables.html#cb4-10" tabindex="-1"></a>      <span class="at">digits =</span> <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="dv">2</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb4-11"><a href="ecdi-variables.html#cb4-11" tabindex="-1"></a>    <span class="fu">bold_labels</span>()<span class="sc">%&gt;%</span></span>
-<span id="cb4-12"><a href="ecdi-variables.html#cb4-12" tabindex="-1"></a>    <span class="co">#Add n per variable</span></span>
-<span id="cb4-13"><a href="ecdi-variables.html#cb4-13" tabindex="-1"></a>    <span class="fu">add_n</span>(</span>
-<span id="cb4-14"><a href="ecdi-variables.html#cb4-14" tabindex="-1"></a>      <span class="at">statistic =</span> <span class="st">&quot;{N_nonmiss}&quot;</span>,</span>
-<span id="cb4-15"><a href="ecdi-variables.html#cb4-15" tabindex="-1"></a>      <span class="at">col_label =</span> <span class="st">&quot;**N**&quot;</span>,</span>
-<span id="cb4-16"><a href="ecdi-variables.html#cb4-16" tabindex="-1"></a>      <span class="at">footnote =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb4-17"><a href="ecdi-variables.html#cb4-17" tabindex="-1"></a>  <span class="fu">return</span>(data_sum)</span>
-<span id="cb4-18"><a href="ecdi-variables.html#cb4-18" tabindex="-1"></a>}</span>
-<span id="cb4-19"><a href="ecdi-variables.html#cb4-19" tabindex="-1"></a></span>
-<span id="cb4-20"><a href="ecdi-variables.html#cb4-20" tabindex="-1"></a>Balo_sum<span class="ot">&lt;-</span><span class="fu">desc_table</span>(Balo_f)</span>
-<span id="cb4-21"><a href="ecdi-variables.html#cb4-21" tabindex="-1"></a>Pahktu_sum<span class="ot">&lt;-</span><span class="fu">desc_table</span>(Pahktu_f)</span>
-<span id="cb4-22"><a href="ecdi-variables.html#cb4-22" tabindex="-1"></a>Punjab_sum<span class="ot">&lt;-</span><span class="fu">desc_table</span>(Punjab_f)</span>
-<span id="cb4-23"><a href="ecdi-variables.html#cb4-23" tabindex="-1"></a>Sindh_sum<span class="ot">&lt;-</span><span class="fu">desc_table</span>(Sindh_f)</span></code></pre></div>
+<div id="observations" class="section level2 unnumbered hasAnchor">
+<h2>Observations<a href="ecdi-variables.html#observations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Summary of observations:</strong></p>
+<p><em>Balochistan is the region where there is the larger number of <em>“Don’t Know”</em> responses.</em></p>
+</div>
+<div id="b-number-of-individuals-with-exploitable-information" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> B) Number of individuals with exploitable information<a href="ecdi-variables.html#b-number-of-individuals-with-exploitable-information" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Goal:</strong>In this section we are interested in describing the people who have YES or NO information on ECDI items.</p>
+<p><br/></p>
 </div>
 <div id="output-1" class="section level2 unnumbered hasAnchor">
 <h2>Output<a href="ecdi-variables.html#output-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="ecdi-variables.html#cb5-1" tabindex="-1"></a><span class="do">## Output#####</span></span>
-<span id="cb5-2"><a href="ecdi-variables.html#cb5-2" tabindex="-1"></a><span class="fu">tbl_merge</span>(</span>
-<span id="cb5-3"><a href="ecdi-variables.html#cb5-3" tabindex="-1"></a>  <span class="at">tbls =</span> <span class="fu">list</span>(Balo_sum, Pahktu_sum, Punjab_sum,Sindh_sum),</span>
-<span id="cb5-4"><a href="ecdi-variables.html#cb5-4" tabindex="-1"></a>  <span class="at">tab_spanner =</span> <span class="fu">c</span>(<span class="st">&quot;**Balo**&quot;</span>, <span class="st">&quot;**Pahktu**&quot;</span>,<span class="st">&quot;**Punjab**&quot;</span>, <span class="st">&quot;**Sindh**&quot;</span>)</span>
-<span id="cb5-5"><a href="ecdi-variables.html#cb5-5" tabindex="-1"></a>)</span></code></pre></div>
-<div id="pvsmbcllne" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#pvsmbcllne table {
+<pre><code>The *function* used for this table needs to indicate *the type for categorical variables as &quot;categorical&quot;* so that both 
+levels of the binary items are described. </code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="ecdi-variables.html#cb5-1" tabindex="-1"></a><span class="co">#Description table function:::::::::::::::::</span></span>
+<span id="cb5-2"><a href="ecdi-variables.html#cb5-2" tabindex="-1"></a>desc_table<span class="ot">&lt;-</span><span class="cf">function</span>(data_f){ </span>
+<span id="cb5-3"><a href="ecdi-variables.html#cb5-3" tabindex="-1"></a>  data_sum<span class="ot">&lt;-</span>data_f<span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="ecdi-variables.html#cb5-4" tabindex="-1"></a>    <span class="fu">tbl_summary</span>(</span>
+<span id="cb5-5"><a href="ecdi-variables.html#cb5-5" tabindex="-1"></a>      <span class="at">include =</span>   <span class="fu">all_of</span>(ECDIvars), </span>
+<span id="cb5-6"><a href="ecdi-variables.html#cb5-6" tabindex="-1"></a>      <span class="at">label=</span> list_labels,</span>
+<span id="cb5-7"><a href="ecdi-variables.html#cb5-7" tabindex="-1"></a>      <span class="at">type =</span> <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;categorical&quot;</span>,   <span class="co"># Show all levels for binary variables </span></span>
+<span id="cb5-8"><a href="ecdi-variables.html#cb5-8" tabindex="-1"></a>      <span class="at">statistic =</span> <span class="fu">list</span>(<span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="st">&quot;{mean} ({sd})&quot;</span>, </span>
+<span id="cb5-9"><a href="ecdi-variables.html#cb5-9" tabindex="-1"></a>                       <span class="fu">all_categorical</span>()<span class="sc">~</span> <span class="st">&quot;{n} ({p}%)&quot;</span>) ,</span>
+<span id="cb5-10"><a href="ecdi-variables.html#cb5-10" tabindex="-1"></a>      <span class="at">digits =</span> <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="dv">2</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb5-11"><a href="ecdi-variables.html#cb5-11" tabindex="-1"></a>    <span class="fu">bold_labels</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb5-12"><a href="ecdi-variables.html#cb5-12" tabindex="-1"></a>    <span class="co">#Add n per variable</span></span>
+<span id="cb5-13"><a href="ecdi-variables.html#cb5-13" tabindex="-1"></a>    <span class="fu">add_n</span>(</span>
+<span id="cb5-14"><a href="ecdi-variables.html#cb5-14" tabindex="-1"></a>      <span class="at">statistic =</span> <span class="st">&quot;{N_nonmiss}&quot;</span>,</span>
+<span id="cb5-15"><a href="ecdi-variables.html#cb5-15" tabindex="-1"></a>      <span class="at">col_label =</span> <span class="st">&quot;**N**&quot;</span>,</span>
+<span id="cb5-16"><a href="ecdi-variables.html#cb5-16" tabindex="-1"></a>      <span class="at">footnote =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb5-17"><a href="ecdi-variables.html#cb5-17" tabindex="-1"></a>  <span class="fu">return</span>(data_sum)</span>
+<span id="cb5-18"><a href="ecdi-variables.html#cb5-18" tabindex="-1"></a>}</span>
+<span id="cb5-19"><a href="ecdi-variables.html#cb5-19" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="ecdi-variables.html#cb5-20" tabindex="-1"></a>Balo_sum<span class="ot">&lt;-</span><span class="fu">desc_table</span>(Balo_f)</span>
+<span id="cb5-21"><a href="ecdi-variables.html#cb5-21" tabindex="-1"></a>Pahktu_sum<span class="ot">&lt;-</span><span class="fu">desc_table</span>(Pahktu_f)</span>
+<span id="cb5-22"><a href="ecdi-variables.html#cb5-22" tabindex="-1"></a>Punjab_sum<span class="ot">&lt;-</span><span class="fu">desc_table</span>(Punjab_f)</span>
+<span id="cb5-23"><a href="ecdi-variables.html#cb5-23" tabindex="-1"></a>Sindh_sum<span class="ot">&lt;-</span><span class="fu">desc_table</span>(Sindh_f)</span></code></pre></div>
+</details>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="ecdi-variables.html#cb6-1" tabindex="-1"></a><span class="do">## Output#####</span></span>
+<span id="cb6-2"><a href="ecdi-variables.html#cb6-2" tabindex="-1"></a><span class="fu">tbl_merge</span>(</span>
+<span id="cb6-3"><a href="ecdi-variables.html#cb6-3" tabindex="-1"></a>  <span class="at">tbls =</span> <span class="fu">list</span>(Balo_sum, Pahktu_sum, Punjab_sum,Sindh_sum),</span>
+<span id="cb6-4"><a href="ecdi-variables.html#cb6-4" tabindex="-1"></a>  <span class="at">tab_spanner =</span> <span class="fu">c</span>(<span class="st">&quot;**Balo**&quot;</span>, <span class="st">&quot;**Pahktu**&quot;</span>,<span class="st">&quot;**Punjab**&quot;</span>, <span class="st">&quot;**Sindh**&quot;</span>)</span>
+<span id="cb6-5"><a href="ecdi-variables.html#cb6-5" tabindex="-1"></a>)</span></code></pre></div>
+</details>
+<div id="nnekkfcbcy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nnekkfcbcy table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#pvsmbcllne thead, #pvsmbcllne tbody, #pvsmbcllne tfoot, #pvsmbcllne tr, #pvsmbcllne td, #pvsmbcllne th {
+#nnekkfcbcy thead, #nnekkfcbcy tbody, #nnekkfcbcy tfoot, #nnekkfcbcy tr, #nnekkfcbcy td, #nnekkfcbcy th {
   border-style: none;
 }
 
-#pvsmbcllne p {
+#nnekkfcbcy p {
   margin: 0;
   padding: 0;
 }
 
-#pvsmbcllne .gt_table {
+#nnekkfcbcy .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1355,12 +1379,12 @@ levels of the binary items are described.</p>
   border-left-color: #D3D3D3;
 }
 
-#pvsmbcllne .gt_caption {
+#nnekkfcbcy .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#pvsmbcllne .gt_title {
+#nnekkfcbcy .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1372,7 +1396,7 @@ levels of the binary items are described.</p>
   border-bottom-width: 0;
 }
 
-#pvsmbcllne .gt_subtitle {
+#nnekkfcbcy .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1384,7 +1408,7 @@ levels of the binary items are described.</p>
   border-top-width: 0;
 }
 
-#pvsmbcllne .gt_heading {
+#nnekkfcbcy .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1396,13 +1420,13 @@ levels of the binary items are described.</p>
   border-right-color: #D3D3D3;
 }
 
-#pvsmbcllne .gt_bottom_border {
+#nnekkfcbcy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#pvsmbcllne .gt_col_headings {
+#nnekkfcbcy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1417,7 +1441,7 @@ levels of the binary items are described.</p>
   border-right-color: #D3D3D3;
 }
 
-#pvsmbcllne .gt_col_heading {
+#nnekkfcbcy .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1437,7 +1461,7 @@ levels of the binary items are described.</p>
   overflow-x: hidden;
 }
 
-#pvsmbcllne .gt_column_spanner_outer {
+#nnekkfcbcy .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1449,15 +1473,15 @@ levels of the binary items are described.</p>
   padding-right: 4px;
 }
 
-#pvsmbcllne .gt_column_spanner_outer:first-child {
+#nnekkfcbcy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pvsmbcllne .gt_column_spanner_outer:last-child {
+#nnekkfcbcy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pvsmbcllne .gt_column_spanner {
+#nnekkfcbcy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1469,11 +1493,11 @@ levels of the binary items are described.</p>
   width: 100%;
 }
 
-#pvsmbcllne .gt_spanner_row {
+#nnekkfcbcy .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#pvsmbcllne .gt_group_heading {
+#nnekkfcbcy .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1499,7 +1523,7 @@ levels of the binary items are described.</p>
   text-align: left;
 }
 
-#pvsmbcllne .gt_empty_group_heading {
+#nnekkfcbcy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1514,15 +1538,15 @@ levels of the binary items are described.</p>
   vertical-align: middle;
 }
 
-#pvsmbcllne .gt_from_md > :first-child {
+#nnekkfcbcy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pvsmbcllne .gt_from_md > :last-child {
+#nnekkfcbcy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pvsmbcllne .gt_row {
+#nnekkfcbcy .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1541,7 +1565,7 @@ levels of the binary items are described.</p>
   overflow-x: hidden;
 }
 
-#pvsmbcllne .gt_stub {
+#nnekkfcbcy .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1554,7 +1578,7 @@ levels of the binary items are described.</p>
   padding-right: 5px;
 }
 
-#pvsmbcllne .gt_stub_row_group {
+#nnekkfcbcy .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1568,15 +1592,15 @@ levels of the binary items are described.</p>
   vertical-align: top;
 }
 
-#pvsmbcllne .gt_row_group_first td {
+#nnekkfcbcy .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#pvsmbcllne .gt_row_group_first th {
+#nnekkfcbcy .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#pvsmbcllne .gt_summary_row {
+#nnekkfcbcy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1586,16 +1610,16 @@ levels of the binary items are described.</p>
   padding-right: 5px;
 }
 
-#pvsmbcllne .gt_first_summary_row {
+#nnekkfcbcy .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#pvsmbcllne .gt_first_summary_row.thick {
+#nnekkfcbcy .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#pvsmbcllne .gt_last_summary_row {
+#nnekkfcbcy .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1605,7 +1629,7 @@ levels of the binary items are described.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#pvsmbcllne .gt_grand_summary_row {
+#nnekkfcbcy .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1615,7 +1639,7 @@ levels of the binary items are described.</p>
   padding-right: 5px;
 }
 
-#pvsmbcllne .gt_first_grand_summary_row {
+#nnekkfcbcy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1625,7 +1649,7 @@ levels of the binary items are described.</p>
   border-top-color: #D3D3D3;
 }
 
-#pvsmbcllne .gt_last_grand_summary_row_top {
+#nnekkfcbcy .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1635,11 +1659,11 @@ levels of the binary items are described.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#pvsmbcllne .gt_striped {
+#nnekkfcbcy .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#pvsmbcllne .gt_table_body {
+#nnekkfcbcy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1648,7 +1672,7 @@ levels of the binary items are described.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#pvsmbcllne .gt_footnotes {
+#nnekkfcbcy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1662,7 +1686,7 @@ levels of the binary items are described.</p>
   border-right-color: #D3D3D3;
 }
 
-#pvsmbcllne .gt_footnote {
+#nnekkfcbcy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1671,7 +1695,7 @@ levels of the binary items are described.</p>
   padding-right: 5px;
 }
 
-#pvsmbcllne .gt_sourcenotes {
+#nnekkfcbcy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1685,7 +1709,7 @@ levels of the binary items are described.</p>
   border-right-color: #D3D3D3;
 }
 
-#pvsmbcllne .gt_sourcenote {
+#nnekkfcbcy .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1693,72 +1717,72 @@ levels of the binary items are described.</p>
   padding-right: 5px;
 }
 
-#pvsmbcllne .gt_left {
+#nnekkfcbcy .gt_left {
   text-align: left;
 }
 
-#pvsmbcllne .gt_center {
+#nnekkfcbcy .gt_center {
   text-align: center;
 }
 
-#pvsmbcllne .gt_right {
+#nnekkfcbcy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pvsmbcllne .gt_font_normal {
+#nnekkfcbcy .gt_font_normal {
   font-weight: normal;
 }
 
-#pvsmbcllne .gt_font_bold {
+#nnekkfcbcy .gt_font_bold {
   font-weight: bold;
 }
 
-#pvsmbcllne .gt_font_italic {
+#nnekkfcbcy .gt_font_italic {
   font-style: italic;
 }
 
-#pvsmbcllne .gt_super {
+#nnekkfcbcy .gt_super {
   font-size: 65%;
 }
 
-#pvsmbcllne .gt_footnote_marks {
+#nnekkfcbcy .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#pvsmbcllne .gt_asterisk {
+#nnekkfcbcy .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#pvsmbcllne .gt_indent_1 {
+#nnekkfcbcy .gt_indent_1 {
   text-indent: 5px;
 }
 
-#pvsmbcllne .gt_indent_2 {
+#nnekkfcbcy .gt_indent_2 {
   text-indent: 10px;
 }
 
-#pvsmbcllne .gt_indent_3 {
+#nnekkfcbcy .gt_indent_3 {
   text-indent: 15px;
 }
 
-#pvsmbcllne .gt_indent_4 {
+#nnekkfcbcy .gt_indent_4 {
   text-indent: 20px;
 }
 
-#pvsmbcllne .gt_indent_5 {
+#nnekkfcbcy .gt_indent_5 {
   text-indent: 25px;
 }
 
-#pvsmbcllne .katex-display {
+#nnekkfcbcy .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#pvsmbcllne div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#nnekkfcbcy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2160,73 +2184,77 @@ levels of the binary items are described.</p>
   </tfoot>
 </table>
 </div>
-<p><strong>Summary of observations</strong></p>
-<p>Punjab &amp; Pahktukistan are the regions where children seem to score more developmentally favorable scores.</p>
 </div>
-<div id="desciption-of-ecdi-in-each-region" class="section level2 hasAnchor" number="1.3">
-<h2><span class="header-section-number">1.3</span> Desciption of ECDI in each region<a href="ecdi-variables.html#desciption-of-ecdi-in-each-region" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="observations-1" class="section level2 unnumbered hasAnchor">
+<h2>Observations<a href="ecdi-variables.html#observations-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Summary of observations</strong><br />
+<em>Punjab &amp; Pahktukistan are the regions where children seem to score more developmentally favorable scores.</em></p>
+</div>
+<div id="c-desciption-of-ecdi-in-each-region" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> C) Desciption of ECDI in each region<a href="ecdi-variables.html#c-desciption-of-ecdi-in-each-region" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Through these code lines I create the ECDI dimensions &amp; the ECDI index.<br />
-** Those who are developmentally on track as per the ECDI are those who are developmentally on track in at least 3 out<br />
-of the 4 dimensions**</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="ecdi-variables.html#cb6-1" tabindex="-1"></a><span class="co">#CREATING VARIABLES DEVELOPMENTALLY ON TRACK VS NOT </span></span>
-<span id="cb6-2"><a href="ecdi-variables.html#cb6-2" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="ecdi-variables.html#cb6-3" tabindex="-1"></a><span class="co">#Filter by individuals who have information across all variables</span></span>
-<span id="cb6-4"><a href="ecdi-variables.html#cb6-4" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="ecdi-variables.html#cb6-5" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="ecdi-variables.html#cb6-6" tabindex="-1"></a>filtercreateECDI<span class="ot">&lt;-</span><span class="cf">function</span>(data){ </span>
-<span id="cb6-7"><a href="ecdi-variables.html#cb6-7" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="ecdi-variables.html#cb6-8" tabindex="-1"></a>  data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb6-9"><a href="ecdi-variables.html#cb6-9" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">if_all</span>(<span class="fu">all_of</span>(ECDIvars), <span class="sc">~</span> <span class="sc">!</span><span class="fu">is.na</span>(.))) <span class="co">#if_all in filter. across in mutate()</span></span>
-<span id="cb6-10"><a href="ecdi-variables.html#cb6-10" tabindex="-1"></a>  </span>
-<span id="cb6-11"><a href="ecdi-variables.html#cb6-11" tabindex="-1"></a>  data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb6-12"><a href="ecdi-variables.html#cb6-12" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb6-13"><a href="ecdi-variables.html#cb6-13" tabindex="-1"></a>      <span class="co"># Domain 1: Literacy-numeracy — at least 2 out of 3 are 1 (YES)</span></span>
-<span id="cb6-14"><a href="ecdi-variables.html#cb6-14" tabindex="-1"></a>      <span class="at">literacy_track =</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(<span class="fu">c</span>(EC6, EC7, EC8), <span class="sc">~</span> . <span class="sc">==</span> <span class="dv">1</span>), <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">&gt;=</span> <span class="dv">2</span>,</span>
-<span id="cb6-15"><a href="ecdi-variables.html#cb6-15" tabindex="-1"></a>      </span>
-<span id="cb6-16"><a href="ecdi-variables.html#cb6-16" tabindex="-1"></a>      <span class="co"># Domain 2: Physical — EC9 == 1 OR EC10 == 2</span></span>
-<span id="cb6-17"><a href="ecdi-variables.html#cb6-17" tabindex="-1"></a>      <span class="at">physical_track =</span> <span class="fu">case_when</span>(EC9 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">|</span> EC10 <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span><span class="st">&quot;TRUE&quot;</span>, </span>
-<span id="cb6-18"><a href="ecdi-variables.html#cb6-18" tabindex="-1"></a>                                 <span class="cn">TRUE</span><span class="sc">~</span><span class="st">&quot;FALSE&quot;</span>),</span>
-<span id="cb6-19"><a href="ecdi-variables.html#cb6-19" tabindex="-1"></a>      </span>
-<span id="cb6-20"><a href="ecdi-variables.html#cb6-20" tabindex="-1"></a>      <span class="co"># Domain 3: Approaches to learning — EC11 == 1 OR EC12 == 1</span></span>
-<span id="cb6-21"><a href="ecdi-variables.html#cb6-21" tabindex="-1"></a>      <span class="at">learning_track =</span> <span class="fu">case_when</span>(EC11 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">|</span> EC12 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">|</span>EC11 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> EC12 <span class="sc">==</span> <span class="dv">1</span>  <span class="sc">~</span> <span class="st">&quot;TRUE&quot;</span>,</span>
-<span id="cb6-22"><a href="ecdi-variables.html#cb6-22" tabindex="-1"></a>                                 <span class="cn">TRUE</span><span class="sc">~</span><span class="st">&quot;FALSE&quot;</span>),</span>
-<span id="cb6-23"><a href="ecdi-variables.html#cb6-23" tabindex="-1"></a>      </span>
-<span id="cb6-24"><a href="ecdi-variables.html#cb6-24" tabindex="-1"></a>      <span class="co"># Domain 4: Social-emotional — at least 2 out of 3 specific conditions</span></span>
-<span id="cb6-25"><a href="ecdi-variables.html#cb6-25" tabindex="-1"></a>      <span class="at">socioemotional_track =</span> <span class="fu">rowSums</span>(<span class="fu">cbind</span>(EC13 <span class="sc">==</span> <span class="dv">1</span>, EC14 <span class="sc">==</span> <span class="dv">2</span>, EC15 <span class="sc">==</span> <span class="dv">2</span>), <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">&gt;=</span> <span class="dv">2</span>,</span>
-<span id="cb6-26"><a href="ecdi-variables.html#cb6-26" tabindex="-1"></a>      </span>
-<span id="cb6-27"><a href="ecdi-variables.html#cb6-27" tabindex="-1"></a>      <span class="co"># Final ECDI: Developmentally on track if ALL 4 domains are TRUE</span></span>
-<span id="cb6-28"><a href="ecdi-variables.html#cb6-28" tabindex="-1"></a>      <span class="at">ECDI =</span> <span class="fu">rowSums</span>(<span class="fu">cbind</span>(socioemotional_track <span class="sc">==</span> <span class="cn">TRUE</span>, learning_track  <span class="sc">==</span> <span class="st">&quot;TRUE&quot;</span>, </span>
-<span id="cb6-29"><a href="ecdi-variables.html#cb6-29" tabindex="-1"></a>                           physical_track <span class="sc">==</span> <span class="st">&quot;TRUE&quot;</span>, literacy_track <span class="sc">==</span> <span class="cn">TRUE</span>),</span>
-<span id="cb6-30"><a href="ecdi-variables.html#cb6-30" tabindex="-1"></a>                          , <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">&gt;=</span> <span class="dv">3</span></span>
-<span id="cb6-31"><a href="ecdi-variables.html#cb6-31" tabindex="-1"></a>    ) </span>
-<span id="cb6-32"><a href="ecdi-variables.html#cb6-32" tabindex="-1"></a></span>
-<span id="cb6-33"><a href="ecdi-variables.html#cb6-33" tabindex="-1"></a><span class="fu">return</span>(data)</span>
-<span id="cb6-34"><a href="ecdi-variables.html#cb6-34" tabindex="-1"></a>}</span>
-<span id="cb6-35"><a href="ecdi-variables.html#cb6-35" tabindex="-1"></a></span>
-<span id="cb6-36"><a href="ecdi-variables.html#cb6-36" tabindex="-1"></a>Balo_f2<span class="ot">&lt;-</span><span class="fu">filtercreateECDI</span>(Balo_f)</span>
-<span id="cb6-37"><a href="ecdi-variables.html#cb6-37" tabindex="-1"></a>Pahktu_f2<span class="ot">&lt;-</span><span class="fu">filtercreateECDI</span>(Pahktu_f)</span>
-<span id="cb6-38"><a href="ecdi-variables.html#cb6-38" tabindex="-1"></a>Punjab_f2<span class="ot">&lt;-</span><span class="fu">filtercreateECDI</span>(Punjab_f)</span>
-<span id="cb6-39"><a href="ecdi-variables.html#cb6-39" tabindex="-1"></a>Sindh_f2<span class="ot">&lt;-</span><span class="fu">filtercreateECDI</span>(Sindh_f)</span></code></pre></div>
+<strong>Those who are developmentally on track as per the ECDI are those who are developmentally on track in at least 3 out of the 4 dimensions</strong></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="ecdi-variables.html#cb7-1" tabindex="-1"></a><span class="co">#CREATING VARIABLES DEVELOPMENTALLY ON TRACK VS NOT </span></span>
+<span id="cb7-2"><a href="ecdi-variables.html#cb7-2" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="ecdi-variables.html#cb7-3" tabindex="-1"></a><span class="co">#Filter by individuals who have information across all variables</span></span>
+<span id="cb7-4"><a href="ecdi-variables.html#cb7-4" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="ecdi-variables.html#cb7-5" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="ecdi-variables.html#cb7-6" tabindex="-1"></a>filtercreateECDI<span class="ot">&lt;-</span><span class="cf">function</span>(data){ </span>
+<span id="cb7-7"><a href="ecdi-variables.html#cb7-7" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="ecdi-variables.html#cb7-8" tabindex="-1"></a>  data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb7-9"><a href="ecdi-variables.html#cb7-9" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">if_all</span>(<span class="fu">all_of</span>(ECDIvars), <span class="sc">~</span> <span class="sc">!</span><span class="fu">is.na</span>(.))) <span class="co">#if_all in filter. across in mutate()</span></span>
+<span id="cb7-10"><a href="ecdi-variables.html#cb7-10" tabindex="-1"></a>  </span>
+<span id="cb7-11"><a href="ecdi-variables.html#cb7-11" tabindex="-1"></a>  data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb7-12"><a href="ecdi-variables.html#cb7-12" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb7-13"><a href="ecdi-variables.html#cb7-13" tabindex="-1"></a>      <span class="co"># Domain 1: Literacy-numeracy — at least 2 out of 3 are 1 (YES)</span></span>
+<span id="cb7-14"><a href="ecdi-variables.html#cb7-14" tabindex="-1"></a>      <span class="at">literacy_track =</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(<span class="fu">c</span>(EC6, EC7, EC8), <span class="sc">~</span> . <span class="sc">==</span> <span class="dv">1</span>), <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">&gt;=</span> <span class="dv">2</span>,</span>
+<span id="cb7-15"><a href="ecdi-variables.html#cb7-15" tabindex="-1"></a>      </span>
+<span id="cb7-16"><a href="ecdi-variables.html#cb7-16" tabindex="-1"></a>      <span class="co"># Domain 2: Physical — EC9 == 1 OR EC10 == 2</span></span>
+<span id="cb7-17"><a href="ecdi-variables.html#cb7-17" tabindex="-1"></a>      <span class="at">physical_track =</span> <span class="fu">case_when</span>(EC9 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">|</span> EC10 <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span><span class="st">&quot;TRUE&quot;</span>, </span>
+<span id="cb7-18"><a href="ecdi-variables.html#cb7-18" tabindex="-1"></a>                                 <span class="cn">TRUE</span><span class="sc">~</span><span class="st">&quot;FALSE&quot;</span>),</span>
+<span id="cb7-19"><a href="ecdi-variables.html#cb7-19" tabindex="-1"></a>      </span>
+<span id="cb7-20"><a href="ecdi-variables.html#cb7-20" tabindex="-1"></a>      <span class="co"># Domain 3: Approaches to learning — EC11 == 1 OR EC12 == 1</span></span>
+<span id="cb7-21"><a href="ecdi-variables.html#cb7-21" tabindex="-1"></a>      <span class="at">learning_track =</span> <span class="fu">case_when</span>(EC11 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">|</span> EC12 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">|</span>EC11 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> EC12 <span class="sc">==</span> <span class="dv">1</span>  <span class="sc">~</span> <span class="st">&quot;TRUE&quot;</span>,</span>
+<span id="cb7-22"><a href="ecdi-variables.html#cb7-22" tabindex="-1"></a>                                 <span class="cn">TRUE</span><span class="sc">~</span><span class="st">&quot;FALSE&quot;</span>),</span>
+<span id="cb7-23"><a href="ecdi-variables.html#cb7-23" tabindex="-1"></a>      </span>
+<span id="cb7-24"><a href="ecdi-variables.html#cb7-24" tabindex="-1"></a>      <span class="co"># Domain 4: Social-emotional — at least 2 out of 3 specific conditions</span></span>
+<span id="cb7-25"><a href="ecdi-variables.html#cb7-25" tabindex="-1"></a>      <span class="at">socioemotional_track =</span> <span class="fu">rowSums</span>(<span class="fu">cbind</span>(EC13 <span class="sc">==</span> <span class="dv">1</span>, EC14 <span class="sc">==</span> <span class="dv">2</span>, EC15 <span class="sc">==</span> <span class="dv">2</span>), <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">&gt;=</span> <span class="dv">2</span>,</span>
+<span id="cb7-26"><a href="ecdi-variables.html#cb7-26" tabindex="-1"></a>      </span>
+<span id="cb7-27"><a href="ecdi-variables.html#cb7-27" tabindex="-1"></a>      <span class="co"># Final ECDI: Developmentally on track if ALL 4 domains are TRUE</span></span>
+<span id="cb7-28"><a href="ecdi-variables.html#cb7-28" tabindex="-1"></a>      <span class="at">ECDI =</span> <span class="fu">rowSums</span>(<span class="fu">cbind</span>(socioemotional_track <span class="sc">==</span> <span class="cn">TRUE</span>, learning_track  <span class="sc">==</span> <span class="st">&quot;TRUE&quot;</span>, </span>
+<span id="cb7-29"><a href="ecdi-variables.html#cb7-29" tabindex="-1"></a>                           physical_track <span class="sc">==</span> <span class="st">&quot;TRUE&quot;</span>, literacy_track <span class="sc">==</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-30"><a href="ecdi-variables.html#cb7-30" tabindex="-1"></a>                          , <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">&gt;=</span> <span class="dv">3</span></span>
+<span id="cb7-31"><a href="ecdi-variables.html#cb7-31" tabindex="-1"></a>    ) </span>
+<span id="cb7-32"><a href="ecdi-variables.html#cb7-32" tabindex="-1"></a></span>
+<span id="cb7-33"><a href="ecdi-variables.html#cb7-33" tabindex="-1"></a><span class="fu">return</span>(data)</span>
+<span id="cb7-34"><a href="ecdi-variables.html#cb7-34" tabindex="-1"></a>}</span>
+<span id="cb7-35"><a href="ecdi-variables.html#cb7-35" tabindex="-1"></a></span>
+<span id="cb7-36"><a href="ecdi-variables.html#cb7-36" tabindex="-1"></a>Balo_f2<span class="ot">&lt;-</span><span class="fu">filtercreateECDI</span>(Balo_f)</span>
+<span id="cb7-37"><a href="ecdi-variables.html#cb7-37" tabindex="-1"></a>Pahktu_f2<span class="ot">&lt;-</span><span class="fu">filtercreateECDI</span>(Pahktu_f)</span>
+<span id="cb7-38"><a href="ecdi-variables.html#cb7-38" tabindex="-1"></a>Punjab_f2<span class="ot">&lt;-</span><span class="fu">filtercreateECDI</span>(Punjab_f)</span>
+<span id="cb7-39"><a href="ecdi-variables.html#cb7-39" tabindex="-1"></a>Sindh_f2<span class="ot">&lt;-</span><span class="fu">filtercreateECDI</span>(Sindh_f)</span></code></pre></div>
+</details>
 </div>
 <div id="output-2" class="section level2 unnumbered hasAnchor">
 <h2>Output<a href="ecdi-variables.html#output-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="stuutwbgsa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#stuutwbgsa table {
+<div id="qylircjitw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qylircjitw table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#stuutwbgsa thead, #stuutwbgsa tbody, #stuutwbgsa tfoot, #stuutwbgsa tr, #stuutwbgsa td, #stuutwbgsa th {
+#qylircjitw thead, #qylircjitw tbody, #qylircjitw tfoot, #qylircjitw tr, #qylircjitw td, #qylircjitw th {
   border-style: none;
 }
 
-#stuutwbgsa p {
+#qylircjitw p {
   margin: 0;
   padding: 0;
 }
 
-#stuutwbgsa .gt_table {
+#qylircjitw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2252,12 +2280,12 @@ of the 4 dimensions**</p>
   border-left-color: #D3D3D3;
 }
 
-#stuutwbgsa .gt_caption {
+#qylircjitw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#stuutwbgsa .gt_title {
+#qylircjitw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2269,7 +2297,7 @@ of the 4 dimensions**</p>
   border-bottom-width: 0;
 }
 
-#stuutwbgsa .gt_subtitle {
+#qylircjitw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2281,7 +2309,7 @@ of the 4 dimensions**</p>
   border-top-width: 0;
 }
 
-#stuutwbgsa .gt_heading {
+#qylircjitw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2293,13 +2321,13 @@ of the 4 dimensions**</p>
   border-right-color: #D3D3D3;
 }
 
-#stuutwbgsa .gt_bottom_border {
+#qylircjitw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#stuutwbgsa .gt_col_headings {
+#qylircjitw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2314,7 +2342,7 @@ of the 4 dimensions**</p>
   border-right-color: #D3D3D3;
 }
 
-#stuutwbgsa .gt_col_heading {
+#qylircjitw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2334,7 +2362,7 @@ of the 4 dimensions**</p>
   overflow-x: hidden;
 }
 
-#stuutwbgsa .gt_column_spanner_outer {
+#qylircjitw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2346,15 +2374,15 @@ of the 4 dimensions**</p>
   padding-right: 4px;
 }
 
-#stuutwbgsa .gt_column_spanner_outer:first-child {
+#qylircjitw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#stuutwbgsa .gt_column_spanner_outer:last-child {
+#qylircjitw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#stuutwbgsa .gt_column_spanner {
+#qylircjitw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2366,11 +2394,11 @@ of the 4 dimensions**</p>
   width: 100%;
 }
 
-#stuutwbgsa .gt_spanner_row {
+#qylircjitw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#stuutwbgsa .gt_group_heading {
+#qylircjitw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2396,7 +2424,7 @@ of the 4 dimensions**</p>
   text-align: left;
 }
 
-#stuutwbgsa .gt_empty_group_heading {
+#qylircjitw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2411,15 +2439,15 @@ of the 4 dimensions**</p>
   vertical-align: middle;
 }
 
-#stuutwbgsa .gt_from_md > :first-child {
+#qylircjitw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#stuutwbgsa .gt_from_md > :last-child {
+#qylircjitw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#stuutwbgsa .gt_row {
+#qylircjitw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2438,7 +2466,7 @@ of the 4 dimensions**</p>
   overflow-x: hidden;
 }
 
-#stuutwbgsa .gt_stub {
+#qylircjitw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2451,7 +2479,7 @@ of the 4 dimensions**</p>
   padding-right: 5px;
 }
 
-#stuutwbgsa .gt_stub_row_group {
+#qylircjitw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2465,15 +2493,15 @@ of the 4 dimensions**</p>
   vertical-align: top;
 }
 
-#stuutwbgsa .gt_row_group_first td {
+#qylircjitw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#stuutwbgsa .gt_row_group_first th {
+#qylircjitw .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#stuutwbgsa .gt_summary_row {
+#qylircjitw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2483,16 +2511,16 @@ of the 4 dimensions**</p>
   padding-right: 5px;
 }
 
-#stuutwbgsa .gt_first_summary_row {
+#qylircjitw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#stuutwbgsa .gt_first_summary_row.thick {
+#qylircjitw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#stuutwbgsa .gt_last_summary_row {
+#qylircjitw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2502,7 +2530,7 @@ of the 4 dimensions**</p>
   border-bottom-color: #D3D3D3;
 }
 
-#stuutwbgsa .gt_grand_summary_row {
+#qylircjitw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2512,7 +2540,7 @@ of the 4 dimensions**</p>
   padding-right: 5px;
 }
 
-#stuutwbgsa .gt_first_grand_summary_row {
+#qylircjitw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2522,7 +2550,7 @@ of the 4 dimensions**</p>
   border-top-color: #D3D3D3;
 }
 
-#stuutwbgsa .gt_last_grand_summary_row_top {
+#qylircjitw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2532,11 +2560,11 @@ of the 4 dimensions**</p>
   border-bottom-color: #D3D3D3;
 }
 
-#stuutwbgsa .gt_striped {
+#qylircjitw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#stuutwbgsa .gt_table_body {
+#qylircjitw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2545,7 +2573,7 @@ of the 4 dimensions**</p>
   border-bottom-color: #D3D3D3;
 }
 
-#stuutwbgsa .gt_footnotes {
+#qylircjitw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2559,7 +2587,7 @@ of the 4 dimensions**</p>
   border-right-color: #D3D3D3;
 }
 
-#stuutwbgsa .gt_footnote {
+#qylircjitw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2568,7 +2596,7 @@ of the 4 dimensions**</p>
   padding-right: 5px;
 }
 
-#stuutwbgsa .gt_sourcenotes {
+#qylircjitw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2582,7 +2610,7 @@ of the 4 dimensions**</p>
   border-right-color: #D3D3D3;
 }
 
-#stuutwbgsa .gt_sourcenote {
+#qylircjitw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2590,72 +2618,72 @@ of the 4 dimensions**</p>
   padding-right: 5px;
 }
 
-#stuutwbgsa .gt_left {
+#qylircjitw .gt_left {
   text-align: left;
 }
 
-#stuutwbgsa .gt_center {
+#qylircjitw .gt_center {
   text-align: center;
 }
 
-#stuutwbgsa .gt_right {
+#qylircjitw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#stuutwbgsa .gt_font_normal {
+#qylircjitw .gt_font_normal {
   font-weight: normal;
 }
 
-#stuutwbgsa .gt_font_bold {
+#qylircjitw .gt_font_bold {
   font-weight: bold;
 }
 
-#stuutwbgsa .gt_font_italic {
+#qylircjitw .gt_font_italic {
   font-style: italic;
 }
 
-#stuutwbgsa .gt_super {
+#qylircjitw .gt_super {
   font-size: 65%;
 }
 
-#stuutwbgsa .gt_footnote_marks {
+#qylircjitw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#stuutwbgsa .gt_asterisk {
+#qylircjitw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#stuutwbgsa .gt_indent_1 {
+#qylircjitw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#stuutwbgsa .gt_indent_2 {
+#qylircjitw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#stuutwbgsa .gt_indent_3 {
+#qylircjitw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#stuutwbgsa .gt_indent_4 {
+#qylircjitw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#stuutwbgsa .gt_indent_5 {
+#qylircjitw .gt_indent_5 {
   text-indent: 25px;
 }
 
-#stuutwbgsa .katex-display {
+#qylircjitw .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#stuutwbgsa div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#qylircjitw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2832,14 +2860,18 @@ of the 4 dimensions**</p>
   </tfoot>
 </table>
 </div>
+</div>
+<div id="observations-2" class="section level2 unnumbered hasAnchor">
+<h2>Observations<a href="ecdi-variables.html#observations-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Summary of observations</strong></p>
-<p>In general, all regions score low in in literacy-numeracy development score (18%:27%)<br />
-The physical dimension of development provides equally high scores for all regions (91%:92%).<br />
-Lower developmental score are generally seen for children in the Balochistan region, especially, &amp; Sindh Region.<br />
-Based on the ECDI, in the Balochistan region 38% are developmentally on track. In the Sindh region 38%. And in<br />
-the Pahktu &amp; Punjab regions, 52% &amp; 60%, respectively.<br />
-The scores that are comparatively low for the Balochistan region, in contrast to other regions,<br />
-are the literacy dimension (18%) &amp; the learning dimension (64%).</p>
+<pre><code>In general, all regions score low in in literacy-numeracy development score (18%:27%)  
+The physical dimension of development provides equally high scores for all regions (91%:92%).
+
+Lower developmental score are generally seen for children in the Balochistan region, especially, &amp; Sindh Region.   
+Based on the ECDI, in the Balochistan region 38% are developmentally on track. In the Sindh region 38%. And in 
+the Pahktu &amp; Punjab regions, 52% &amp; 60%, respectively.   
+The scores that are comparatively low for the Balochistan region,in contrast to other regions,
+are the literacy dimension (18%) &amp; the learning dimension (64%). </code></pre>
 
 </div>
 </div>
