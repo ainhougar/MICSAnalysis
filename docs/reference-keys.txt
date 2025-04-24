@@ -2,3 +2,14 @@ ecdi-variables
 a-raw-configuration
 b-number-of-individuals-with-exploitable-information
 c-desciption-of-ecdi-in-each-region
+other-variables
+a-sex-language-health-insurance
+b-other-general-variables
+bbis-other-general-variables-extra
+c-birth-registry
+d-contribution-to-child-education
+e-child-discipline
+f-child-functioning
+g-vaccination-card
+hever-vaccinated
+maihda-beginnings
