@@ -13,3 +13,5 @@ f-child-functioning
 g-vaccination-card
 hever-vaccinated
 maihda-beginnings
+ecdi-in-pakistan-all-regions
+candidate-variable-for-strata
